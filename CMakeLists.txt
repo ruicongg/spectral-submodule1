@@ -11,6 +11,10 @@ project(${PROJECT_NAME} VERSION ${VERSION} LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set source file names based on project name
+set(MAIN_SOURCE_FILE "${PROJECT_NAME}.cpp")
+set(TEST_SOURCE_FILE "test/test_${PROJECT_NAME}.cpp")
+
 # Dependencies path
 set(DEPS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps")
 
@@ -83,7 +87,7 @@ if(NOT deps_err)
 endif()
 
 # Create static library
-add_library(${PROJECT_NAME} STATIC submodule1.cpp)
+add_library(${PROJECT_NAME} STATIC ${MAIN_SOURCE_FILE})
 
 # Add include directories
 target_include_directories(${PROJECT_NAME} PUBLIC 
@@ -173,7 +177,7 @@ if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
     include_directories(${GTEST_INCLUDE_DIRS})
     
     # Add test executable with a unique name based on the project
-    add_executable(${PROJECT_NAME}_unit_tests test/test_submodule1.cpp submodule1.cpp)
+    add_executable(${PROJECT_NAME}_unit_tests ${TEST_SOURCE_FILE} ${MAIN_SOURCE_FILE})
     target_include_directories(${PROJECT_NAME}_unit_tests PRIVATE 
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${DEPS_DIR}
