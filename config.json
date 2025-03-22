@@ -1,0 +1,12 @@
+{
+    "name": "submodule1",
+    "import": "submodule1.h",
+    "version": "1.0.0",
+    "dependencies": [
+        {
+            "name": "submodule1_1",
+            "import": "submodule1_1.h",
+            "path": "https://github.com/ruicongg/spectral-submodule1-1"
+        }
+    ]
+} 
